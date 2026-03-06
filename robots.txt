@@ -1,4 +1,7 @@
+# One Touch LLC - Robots Configuration
 User-agent: *
 Allow: /
+Allow: /apps/
 
-Sitemap: https://onetouchllc.github.io/sitemap.xml
+# Sitemap Location
+Sitemap: https://one-touchllc.github.io/sitemap.xml
