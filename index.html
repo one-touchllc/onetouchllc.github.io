@@ -1,35 +1,278 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta name="google-site-verification" content="jN3NDua2SHvMiCCEaL7c3xtkZJLZKbYedJ06nQqDris" />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Spark | One Touch Hub</title>
+    <title>One Touch LLC | Elite Digital Hub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;400;600;800&family=Orbitron:wght@500;900&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@900&family=Plus+Jakarta+Sans:wght@300;600&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
     <style>
-        body { background: #020617; color: white; font-family: 'Plus Jakarta Sans', sans-serif; cursor: default; }
-        .glass { background: rgba(255, 255, 255, 0.02); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.1); }
-        .glow { box-shadow: 0 0 50px -10px rgba(0, 242, 255, 0.2); }
+        :root {
+            --accent: #00f2ff;
+            --deep-blue: #020617;
+            --glass: rgba(255, 255, 255, 0.01);
+            --glass-border: rgba(255, 255, 255, 0.06);
+            --cursor-size: 16px;
+        }
+
+        * { cursor: none !important; }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--deep-blue);
+            color: #ffffff;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        .mesh-bg {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: 
+                radial-gradient(circle at 10% 20%, rgba(0, 242, 255, 0.04) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(37, 99, 235, 0.04) 0%, transparent 40%),
+                radial-gradient(circle at 50% 50%, #020617 0%, #000 100%);
+            z-index: -2;
+        }
+
+        .cursor-follower {
+            position: fixed;
+            width: var(--cursor-size);
+            height: var(--cursor-size);
+            background: white;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            mix-blend-mode: difference;
+            transition: transform 0.1s ease-out, width 0.4s cubic-bezier(0.19, 1, 0.22, 1), height 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+            transform: translate(-50%, -50%);
+        }
+
+        .cursor-follower.hovering { width: 60px; height: 60px; background: white; }
+
+        .glass-card {
+            background: var(--glass);
+            backdrop-filter: blur(25px);
+            border: 1px solid var(--glass-border);
+            border-radius: 32px;
+            transition: all 0.7s cubic-bezier(0.19, 1, 0.22, 1);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .glass-card:hover {
+            background: rgba(255, 255, 255, 0.03);
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: scale(1.02);
+            box-shadow: 0 30px 60px -15px rgba(0,0,0,0.5);
+        }
+
+        .action-btn {
+            width: 54px; height: 54px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex; align-items: center; justify-content: center;
+            transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+            flex-shrink: 0;
+        }
+
+        .action-btn:hover { background: white; color: black; transform: scale(1.1); }
+
+        .magnetic-btn {
+            border-radius: 12px;
+            padding: 0.6rem 1.4rem;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--glass-border);
+            transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+            font-size: 0.75rem; font-weight: 600;
+            text-transform: uppercase; color: rgba(255, 255, 255, 0.5);
+        }
+
+        .magnetic-btn.active { background: white; color: black; border-color: white; }
+
+        .reveal-text {
+            background: linear-gradient(180deg, #fff 40%, rgba(255,255,255,0.1) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 10px; }
     </style>
 </head>
-<body class="flex items-center justify-center min-h-screen p-6">
-    <div class="max-w-4xl w-full glass rounded-[40px] p-12 text-center glow">
-        <a href="/" class="text-xs tracking-[0.4em] uppercase text-white/30 hover:text-white transition-all mb-12 inline-block">← Return to Interface</a>
-        
-        <h1 class="font-orbitron text-5xl md:text-7xl font-black tracking-tighter mb-4 bg-gradient-to-b from-white to-white/20 bg-clip-text text-transparent uppercase">
-            Spark
-        </h1>
-        <p class="text-white/50 text-lg font-light mb-12">
-            Asocial media application.
-        </p>
-        
-        <div class="aspect-video w-full rounded-3xl bg-black/40 border border-white/5 flex items-center justify-center relative overflow-hidden">
-            <div class="absolute inset-0 bg-gradient-to-tr from-cyan-500/5 to-transparent"></div>
-            <div class="z-10 text-center">
-                <p class="text-white/20 font-orbitron text-xs tracking-widest mb-6 uppercase">Initializing Neural Link...</p>
-                <a href="" target="sparkk.base44.app" class="px-8 py-4 bg-white text-black font-bold rounded-full hover:scale-105 transition-transform inline-block">LAUNCH MODULE</a>
+<body>
+    <div class="mesh-bg"></div>
+    <div id="cursor" class="cursor-follower"></div>
+
+    <div class="max-w-6xl mx-auto px-6 pt-32 pb-24">
+        <header class="mb-32">
+            <div data-aos="fade-right" data-aos-duration="1500">
+                <p class="text-white/40 font-orbitron text-[10px] tracking-[0.8em] mb-4 uppercase">Neural Interface v2.0</p>
+                <h1 class="font-orbitron text-6xl md:text-9xl font-black tracking-tighter mb-8 reveal-text leading-none">
+                    ONE<br>TOUCH
+                </h1>
             </div>
+            <div class="max-w-xl" data-aos="fade-up" data-aos-delay="300">
+                <p class="text-white/50 text-base md:text-lg font-light leading-relaxed">
+                    Access a sovereign collection of digital artifacts. Click any module to explore its dedicated interface.
+                </p>
+            </div>
+        </header>
+
+        <section class="mb-24 space-y-12">
+            <div class="flex flex-col md:flex-row gap-6 items-center justify-between" data-aos="fade-up" data-aos-delay="400">
+                <div class="search-container relative glass-card p-0 w-full md:w-96 rounded-2xl overflow-hidden">
+                    <input type="text" id="search-input" placeholder="Search modules..." 
+                           class="w-full bg-transparent py-4 px-6 text-sm font-medium focus:outline-none placeholder:text-white/20" 
+                           oninput="filterApps()">
+                </div>
+                <div id="tag-filters" class="flex gap-2 flex-wrap justify-end"></div>
+            </div>
+        </section>
+
+        <div id="apps-container" class="grid grid-cols-1 gap-4"></div>
+
+        <div id="no-results" class="hidden text-center py-40">
+            <p class="font-orbitron text-sm text-white/20 tracking-widest uppercase">Null Response // Grid is Empty</p>
         </div>
     </div>
+
+    <footer class="py-24 text-center border-t border-white/5">
+        <p class="text-white/10 uppercase tracking-[0.4em] text-[9px] mb-2 font-bold">Protocol established 2024</p>
+        <p class="text-white/5 font-orbitron text-[8px] mb-4">ENCRYPTED ECOSYSTEM // ROOT_ACCESS</p>
+        <div class="mt-8 pt-8 border-t border-white/5">
+            <p class="text-white/5 text-[7px] tracking-widest uppercase">© One Touch LLC all rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Updated JS with internal links to your apps folder
+        const apps = [
+            { name: 'Horror Escape', description: 'Advanced psychological simulation module.', url: '/apps/horror-escape.html', tags: ['Experience'] },
+            { name: 'Chess King', description: 'Deep-learning neural engine for strategic training.', url: '/apps/chess-king.html', tags: ['AI', 'Game'] },
+            { name: 'Ice Hockey', description: 'Kinetic physics simulation in sub-zero environments.', url: '/apps/ice-hockey.html', tags: ['Sports'] },
+            { name: 'Circle.io', description: 'Biological expansion in a high-concurrency grid.', url: '/apps/circle-io.html', tags: ['MMO'] },
+            { name: 'One Clock', description: 'Atomic precision temporal monitoring.', url: '/apps/one-clock.html', tags: ['Utility'] },
+            { name: 'One Weather', description: 'Satellite-grade climate telemetry.', url: '/apps/one-weather.html', tags: ['Data'] },
+            { name: 'One Browser', description: 'Noise-canceled browsing environment.', url: '/apps/one-browser.html', tags: ['Utility'] },
+            { name: 'Hicktal AI', description: 'Semantic content synthesis interface.', url: '/apps/hicktal-ai.html', tags: ['AI'] },
+            { name: 'Aether AI', description: 'Persistent context conversational logic.', url: '/apps/aether-ai.html', tags: ['AI'] },
+            { name: 'One Sheets', description: 'Distributed ledger data processing.', url: '/apps/one-sheets.html', tags: ['Business'] },
+            { name: 'App Sphere', description: 'Core software distribution node.', url: '/apps/app-sphere.html', tags: ['Hub'] },
+            { name: 'Spark', description: 'Flash-sync social interaction engine.', url: '/apps/spark.html', tags: ['Social'] }
+        ];
+
+        let activeTag = 'All';
+        const cursor = document.getElementById('cursor');
+        let mouseX = 0, mouseY = 0, ballX = 0, ballY = 0;
+        const speed = 0.25;
+
+        function animateCursor() {
+            ballX += (mouseX - ballX) * speed;
+            ballY += (mouseY - ballY) * speed;
+            cursor.style.left = ballX + "px";
+            cursor.style.top = ballY + "px";
+            requestAnimationFrame(animateCursor);
+        }
+        animateCursor();
+
+        window.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+
+        document.addEventListener('mouseover', (e) => {
+            if (e.target.closest('a') || e.target.closest('button') || e.target.closest('input')) {
+                cursor.classList.add('hovering');
+            }
+        });
+
+        document.addEventListener('mouseout', (e) => {
+            if (e.target.closest('a') || e.target.closest('button') || e.target.closest('input')) {
+                cursor.classList.remove('hovering');
+            }
+        });
+
+        function createCard(app, index) {
+            const card = document.createElement('div');
+            card.className = 'glass-card p-6 md:p-8 flex items-center group';
+            card.setAttribute('data-aos', 'fade-up');
+            card.setAttribute('data-aos-delay', index * 50);
+
+            card.innerHTML = `
+                <div class="flex items-center gap-8 flex-1">
+                    <div class="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center font-bold text-lg group-hover:bg-white group-hover:text-black transition-all duration-500 flex-shrink-0">
+                        ${app.name.charAt(0)}
+                    </div>
+                    <div class="min-w-0 pr-4">
+                        <div class="flex items-center gap-3 mb-1 flex-wrap">
+                            <h3 class="font-semibold text-lg tracking-tight truncate">${app.name}</h3>
+                            ${app.tags.map(t => `<span class="text-[8px] tracking-[0.2em] uppercase text-white/30 font-bold">${t}</span>`).join('')}
+                        </div>
+                        <p class="text-white/40 text-sm font-light leading-snug max-w-md line-clamp-1">${app.description}</p>
+                    </div>
+                </div>
+                <a href="${app.url}" class="action-btn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M7 17l9.2-9.2M17 17V7H7" />
+                    </svg>
+                </a>
+            `;
+            return card;
+        }
+
+        function filterApps() {
+            const term = document.getElementById('search-input').value.toLowerCase();
+            const filtered = apps.filter(app => {
+                const searchMatch = app.name.toLowerCase().includes(term) || app.description.toLowerCase().includes(term);
+                const tagMatch = activeTag === 'All' || app.tags.includes(activeTag);
+                return searchMatch && tagMatch;
+            });
+
+            const container = document.getElementById('apps-container');
+            container.innerHTML = '';
+            
+            if (filtered.length === 0) {
+                document.getElementById('no-results').classList.remove('hidden');
+            } else {
+                document.getElementById('no-results').classList.add('hidden');
+                filtered.forEach((app, i) => container.appendChild(createCard(app, i)));
+            }
+            AOS.refresh();
+        }
+
+        function setupFilters() {
+            const tags = new Set(['All']);
+            apps.forEach(app => app.tags.forEach(tag => tags.add(tag)));
+            const container = document.getElementById('tag-filters');
+            
+            tags.forEach(tag => {
+                const btn = document.createElement('button');
+                btn.className = `magnetic-btn ${tag === 'All' ? 'active' : ''}`;
+                btn.textContent = tag;
+                btn.onclick = () => {
+                    document.querySelectorAll('.magnetic-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    activeTag = tag;
+                    filterApps();
+                };
+                container.appendChild(btn);
+            });
+        }
+
+        window.onload = () => {
+            AOS.init({ duration: 1000, easing: 'cubic-bezier(0.19, 1, 0.22, 1)', once: true });
+            setupFilters();
+            filterApps();
+        };
+    </script>
 </body>
 </html>
