@@ -1,0 +1,23 @@
+POST /IndexNow HTTP/1.1
+Content-Type: application/json; charset=utf-8
+Host: api.indexnow.org
+{
+  "host": "https://one-touchllc.github.io/",
+  "key": "b5e183b64d8849dfbd091fa84dce0232",
+  "keyLocation": "https://one-touchllc.github.io/b5e183b64d8849dfbd091fa84dce0232.txt",
+  "urlList": [
+      https://one-touchllc.github.io/
+https://one-touchllc.github.io/apps/chess-king.html,
+https://one-touchllc.github.io/apps/horror-escape.html,
+https://one-touchllc.github.io/apps/ice-hockey.html,
+https://one-touchllc.github.io/apps/circle-io.html,
+https://one-touchllc.github.io/apps/one-clock.html,
+https://one-touchllc.github.io/apps/one-weather.html,
+https://one-touchllc.github.io/apps/one-browser.html,
+https://one-touchllc.github.io/apps/hicktal-ai.html,
+https://one-touchllc.github.io/apps/aether-ai.html,
+https://one-touchllc.github.io/apps/one-sheets.html,
+https://one-touchllc.github.io/apps/app-sphere.html,
+https://one-touchllc.github.io/apps/spark.html
+      ]
+}
